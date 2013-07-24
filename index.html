@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Sendgrid-nodejs by sendgrid</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Sendgrid-nodejs</h1>
+        <p>SendGrid Node.js helper library</p>
+
+        <p class="view"><a href="https://github.com/sendgrid/sendgrid-nodejs">View the Project on GitHub <small>sendgrid/sendgrid-nodejs</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/sendgrid/sendgrid-nodejs/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/sendgrid/sendgrid-nodejs/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/sendgrid/sendgrid-nodejs">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="sendgrid-nodejs" class="anchor" href="#sendgrid-nodejs"><span class="octicon octicon-link"></span></a>Sendgrid-nodejs</h1>
+
+<p>This nodejs module allows you to quickly and easily send emails through SendGrid using <a href="http://nodejs.org/">nodejs</a>.</p>
+
+<p>Note: This module was recently upgraded from <a href="https://github.com/sendgrid/sendgrid-nodejs/tree/v0.2.11">0.2.x</a> to 0.3.x. There were API breaking changes. For documentation on 0.2.x, please <a href="https://github.com/sendgrid/sendgrid-nodejs/tree/v0.2.11">go here</a>.</p>
+
+<p><a href="https://travis-ci.org/sendgrid/sendgrid-nodejs"><img src="https://travis-ci.org/sendgrid/sendgrid-nodejs.png?branch=master" alt="BuildStatus"></a></p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">sendgrid</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'sendgrid'</span><span class="p">)(</span><span class="nx">api_user</span><span class="p">,</span> <span class="nx">api_key</span><span class="p">);</span>
+<span class="nx">sendgrid</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+  <span class="nx">to</span><span class="o">:</span>       <span class="s1">'example@example.com'</span><span class="p">,</span>
+  <span class="nx">from</span><span class="o">:</span>     <span class="s1">'other@example.com'</span><span class="p">,</span>
+  <span class="nx">subject</span><span class="o">:</span>  <span class="s1">'Hello World'</span><span class="p">,</span>
+  <span class="nx">text</span><span class="o">:</span>     <span class="s1">'My first email through SendGrid.'</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>The following recommended installation requires <a href="https://npmjs.org/">npm</a>. If you are unfamiliar with npm, see the <a href="https://npmjs.org/doc/">npm docs</a>. Npm comes installed with Node.js since node version 0.8.x therefore you likely already have it.</p>
+
+<p>Add the following to your <code>package.json</code> file:</p>
+
+<div class="highlight"><pre><span class="p">{</span>
+  <span class="err">...</span>
+  <span class="nt">"dependencies"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="err">...</span>
+    <span class="nt">"sendgrid"</span><span class="p">:</span> <span class="s2">"0.3.0"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Install sendgrid-nodejs and its dependencies:</p>
+
+<div class="highlight"><pre>npm install
+</pre></div>
+
+<h3>
+<a name="alternative-installation" class="anchor" href="#alternative-installation"><span class="octicon octicon-link"></span></a>Alternative Installation</h3>
+
+<p>You can also install sendgrid locally with the following command:</p>
+
+<div class="highlight"><pre>npm install sendgrid
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>To begin using this library, initialize the SendGrid object with your SendGrid credentials.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">sendgrid</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'sendgrid'</span><span class="p">)(</span><span class="nx">api_user</span><span class="p">,</span> <span class="nx">api_key</span><span class="p">);</span>
+</pre></div>
+
+<p>Create a new JavaScript object with your message details.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">payload</span>   <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">to</span>      <span class="o">:</span> <span class="s1">'to@example.com'</span><span class="p">,</span>
+  <span class="nx">from</span>    <span class="o">:</span> <span class="s1">'from@other.com'</span><span class="p">,</span>
+  <span class="nx">subject</span> <span class="o">:</span> <span class="s1">'Saying Hi'</span><span class="p">,</span>
+  <span class="nx">text</span>    <span class="o">:</span> <span class="s1">'This is my first email through SendGrid'</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Send it.</p>
+
+<div class="highlight"><pre><span class="nx">sendgrid</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">payload</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<p><strong>Alternatively you can send it explicitly via Web or SMTP.</strong></p>
+
+<div class="highlight"><pre><span class="nx">sendgrid</span><span class="p">.</span><span class="nx">web</span><span class="p">(</span><span class="nx">payload</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>Or</p>
+
+<div class="highlight"><pre><span class="nx">sendgrid</span><span class="p">.</span><span class="nx">smtp</span><span class="p">(</span><span class="nx">payload</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="power-usage" class="anchor" href="#power-usage"><span class="octicon octicon-link"></span></a>Power Usage</h2>
+
+<p>There are two additioanl objects built into this library that will help you use this library as a power user.</p>
+
+<ul>
+<li>Email</li>
+<li>SmtpapiHeaders</li>
+</ul><h3>
+<a name="email" class="anchor" href="#email"><span class="octicon octicon-link"></span></a>Email</h3>
+
+<p>Email helps you more powerfully prepare your message to be sent.</p>
+
+<p>NOTE: anything that is available in the Email constructor is available for use in the <code>sendgrid.send</code>, <code>sendgrid.web</code>, and <code>sendgrid.smtp</code> functions.</p>
+
+<p>To get started create an Email object:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">sendgrid</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'sendgrid'</span><span class="p">)(</span><span class="nx">api_user</span><span class="p">,</span> <span class="nx">api_key</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">Email</span>     <span class="o">=</span> <span class="nx">sendgrid</span><span class="p">.</span><span class="nx">Email</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">email</span>     <span class="o">=</span> <span class="k">new</span> <span class="nx">Email</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+</pre></div>
+
+<p>You can pass in as much or as little to <code>params</code> as you want, as
+the email object has methods for manipulating all of the data.</p>
+
+<p><strong>params structure</strong></p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">to</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="nx">toname</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="nx">from</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="nx">fromname</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="nx">smtpapi</span><span class="o">:</span> <span class="k">new</span> <span class="nx">SmtpapiHeaders</span><span class="p">(),</span>
+  <span class="nx">subject</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="nx">text</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="nx">html</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="nx">bcc</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="nx">replyto</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="nx">date</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+  <span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nx">filename</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>          <span class="c1">// required only if file.content is used.</span>
+      <span class="nx">contentType</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>       <span class="c1">// optional</span>
+      <span class="nx">cid</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>               <span class="c1">// optional, used to specify cid for inline content</span>
+      <span class="nx">path</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>              <span class="c1">//</span>
+      <span class="nx">url</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>               <span class="c1">// == One of these three options is required</span>
+      <span class="nx">content</span><span class="o">:</span> <span class="p">(</span><span class="s1">''</span> <span class="o">|</span> <span class="nx">Buffer</span><span class="p">)</span> <span class="c1">//</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nx">file_data</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="nx">headers</span><span class="o">:</span> <span class="p">{}</span>
+<span class="p">};</span>
+</pre></div>
+
+<p>Here is a sample for using it:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">email</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Email</span><span class="p">({</span>
+  <span class="nx">to</span><span class="o">:</span> <span class="s1">'walks.it.in@sample.com'</span><span class="p">,</span>
+  <span class="nx">from</span><span class="o">:</span> <span class="s1">'arsenal@sample.com'</span><span class="p">,</span>
+  <span class="nx">subject</span><span class="o">:</span> <span class="s1">'What was Wenger thinking sending Walcott on that early?'</span><span class="p">,</span>
+  <span class="nx">text</span><span class="o">:</span> <span class="s1">'Did you see that ludicrous display last night?'</span>
+<span class="p">});</span>
+</pre></div>
+
+<h4>
+<a name="setting-data" class="anchor" href="#setting-data"><span class="octicon octicon-link"></span></a>Setting data</h4>
+
+<p>Here is an example of all of the functions available on the email object. The comments to the right show the current state of the variables as the functions are called. If you have a specific question, see the <a href="http://docs.sendgrid.com/documentation/api/">SendGrid API Docs</a>. Please open a <a href="https://github.com/sendgrid/sendgrid-nodejs/issues">GitHub issue</a> if you find bugs or missing features.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">sendgrid</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'sendgrid'</span><span class="p">)(</span><span class="nx">api_user</span><span class="p">,</span> <span class="nx">api_key</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">Email</span>     <span class="o">=</span> <span class="nx">sendgrid</span><span class="p">.</span><span class="nx">Email</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">email</span>     <span class="o">=</span> <span class="k">new</span> <span class="nx">Email</span><span class="p">({</span>
+  <span class="nx">to</span><span class="o">:</span> <span class="s1">'denim@sample.com'</span><span class="p">,</span>
+  <span class="nx">from</span><span class="o">:</span> <span class="s1">'roy@sample.com'</span><span class="p">,</span>
+  <span class="nx">subject</span><span class="o">:</span> <span class="s1">'Listen'</span><span class="p">,</span>
+  <span class="nx">text</span><span class="o">:</span> <span class="s1">'Have you tried turning it off and on again'</span>
+<span class="p">});</span>
+
+<span class="cm">/** The following examples update the 'x-smtpapi' headers **/</span>
+
+<span class="cm">/* To Addresses */</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addTo</span><span class="p">(</span><span class="s1">'moo@cow.com'</span><span class="p">);</span>       <span class="c1">// to = ['moo@cow.com']</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addTo</span><span class="p">([</span><span class="s1">'solid@snake.com'</span><span class="p">,</span>
+            <span class="s1">'liquid@snake.com'</span><span class="p">]);</span> <span class="c1">// to = ['moo@cow.com', 'solid@snake.com', 'liquid@snake.com']</span>
+
+<span class="cm">/* Custom Email Headers */</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">setHeaders</span><span class="p">({</span><span class="nx">full</span><span class="o">:</span> <span class="s1">'hearts'</span><span class="p">});</span>   <span class="c1">// headers = {full: 'hearts'}</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addHeaders</span><span class="p">({</span><span class="nx">spin</span><span class="o">:</span> <span class="s1">'attack'</span><span class="p">});</span>   <span class="c1">// headers = {full: 'hearts', spin: 'attack'}</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">setHeaders</span><span class="p">({</span><span class="nx">mask</span><span class="o">:</span> <span class="s1">'salesman'</span><span class="p">});</span> <span class="c1">// headers = {mask: 'salesman'}</span>
+
+<span class="cm">/* Substitution */</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addSubVal</span><span class="p">(</span><span class="s1">'keep'</span><span class="p">,</span> <span class="s1">'secret'</span><span class="p">);</span> <span class="c1">// sub = {keep: ['secret']}</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addSubVal</span><span class="p">(</span><span class="s1">'keep'</span><span class="p">,</span> <span class="s1">'safe'</span><span class="p">);</span>   <span class="c1">// sub = {keep: ['secret', 'safe']}</span>
+
+<span class="cm">/* Section */</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">setSection</span><span class="p">({</span><span class="s1">'-charge-'</span><span class="o">:</span> <span class="s1">'This ship is useless.'</span><span class="p">});</span> <span class="c1">// section = {'-charge-': 'This ship is useless.'}</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addSection</span><span class="p">({</span><span class="s1">'-bomber-'</span><span class="o">:</span> <span class="s1">'Only for sad vikings.'</span><span class="p">});</span> <span class="c1">// section = {'-charge-': 'This ship is useless.',</span>
+                                                         <span class="c1">//            '-bomber-': 'Only for sad vikings.'}</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">setSection</span><span class="p">({</span><span class="s1">'-beam-'</span><span class="o">:</span> <span class="s1">'The best is for first'</span><span class="p">});</span>   <span class="c1">// section = {'-beam-': 'The best is for first'}</span>
+
+<span class="cm">/* Unique Args */</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">setUniqueArgs</span><span class="p">({</span><span class="nx">cow</span><span class="o">:</span> <span class="s1">'chicken'</span><span class="p">});</span> <span class="c1">// unique_args = {cow: 'chicken'}</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addUniqueArgs</span><span class="p">({</span><span class="nx">cat</span><span class="o">:</span> <span class="s1">'dog'</span><span class="p">});</span>     <span class="c1">// unique_args = {cow: 'chicken', cat: 'dog'}</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">setUniqueArgs</span><span class="p">({</span><span class="nx">dad</span><span class="o">:</span> <span class="s1">'proud'</span><span class="p">});</span>   <span class="c1">// unique_args = {dad: 'proud'}</span>
+
+<span class="cm">/* Category */</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">setCategory</span><span class="p">(</span><span class="s1">'tactics'</span><span class="p">);</span>        <span class="c1">// category = ['tactics']</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addCategory</span><span class="p">(</span><span class="s1">'advanced'</span><span class="p">);</span>       <span class="c1">// category = ['tactics', 'advanced']</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">setCategory</span><span class="p">(</span><span class="s1">'snowball-fight'</span><span class="p">);</span> <span class="c1">// category = ['snowball-fight']</span>
+
+<span class="cm">/* Filters */</span>
+<span class="c1">// You can set a filter using an object literal</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">setFilterSetting</span><span class="p">({</span>
+  <span class="s1">'footer'</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">'setting'</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s1">'enable'</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s1">'text/plain'</span><span class="o">:</span> <span class="s1">'You can haz footers!'</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// Alternatively, you can add filter settings one at a time.</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addFilterSetting</span><span class="p">(</span><span class="s1">'footer'</span><span class="p">,</span> <span class="s1">'enable'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addFilterSetting</span><span class="p">(</span><span class="s1">'footer'</span><span class="p">,</span> <span class="s1">'text/html'</span><span class="p">,</span> <span class="s1">'&lt;strong&gt;boo&lt;/strong&gt;'</span><span class="p">);</span>
+
+<span class="cm">/* Attachments */</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * You can add files directly from content in memory.</span>
+<span class="cm"> *</span>
+<span class="cm"> * It will try to guess the contentType based on the filename.</span>
+<span class="cm"> */</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addFile</span><span class="p">({</span>
+  <span class="nx">filename</span><span class="o">:</span> <span class="s1">'secret.txt'</span><span class="p">,</span>
+  <span class="nx">content</span><span class="o">:</span>  <span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="s1">'You will never know....'</span><span class="p">)</span>
+<span class="p">});</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * You can add files directly from a url.</span>
+<span class="cm"> *</span>
+<span class="cm"> * It will try to guess the contentType based on the filename.</span>
+<span class="cm"> */</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addFile</span><span class="p">({</span>
+  <span class="nx">filename</span><span class="o">:</span> <span class="s1">'icon.jpg'</span><span class="p">,</span>
+  <span class="nx">url</span><span class="o">:</span> <span class="s1">'http://i.imgur.com/2fDh8.jpg'</span>
+<span class="p">});</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * You can add files from a path on the filesystem.</span>
+<span class="cm"> *</span>
+<span class="cm"> * It will try to grap the filename and contentType from the path.</span>
+<span class="cm"> */</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addFile</span><span class="p">({</span>
+  <span class="nx">path</span><span class="o">:</span> <span class="s1">'../files/resume.txt'</span>
+<span class="p">});</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * You can tag files for use as inline HTML content.</span>
+<span class="cm"> *</span>
+<span class="cm"> * It will mark the file for inline disposition using the specified "cid".</span>
+<span class="cm"> */</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addFile</span><span class="p">({</span>
+  <span class="nx">cid</span><span class="o">:</span> <span class="s1">'the_logo'</span><span class="p">,</span>           <span class="c1">// should match cid value in html</span>
+  <span class="nx">path</span><span class="o">:</span> <span class="s1">'../files/logo.png'</span>
+<span class="p">});</span>
+<span class="nx">email</span><span class="p">.</span><span class="nx">addHtml</span><span class="p">(</span><span class="s1">'&lt;div&gt;Our logo:&lt;img src="cid:the_logo"&gt;&lt;/div&gt;'</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h2>
+<a name="running-tests" class="anchor" href="#running-tests"><span class="octicon octicon-link"></span></a>Running Tests</h2>
+
+<p>The existing tests can be run using <a href="http://visionmedia.github.io/mocha/">Mocha</a> with the following command:</p>
+
+<div class="highlight"><pre>npm <span class="nb">test</span>
+</pre></div>
+
+<p>You can run individual tests with the following command:</p>
+
+<div class="highlight"><pre>./node_modules/.bin/mocha <span class="o">[</span>path to <span class="nb">test</span><span class="o">]</span>.js
+</pre></div>
+
+<h3>
+<a name="integration-tests" class="anchor" href="#integration-tests"><span class="octicon octicon-link"></span></a>Integration Tests</h3>
+
+<p>In order to run the integration tests, you'll need to update the environment file with your valid SendGrid credentials. Start by making a live copy of the example:</p>
+
+<div class="highlight"><pre>cp .env.example .env.test
+</pre></div>
+
+<p>Next, open up <code>.env.test</code> and fill it in.  After you have updated the environment file with your credentials, you can run the suite using the following command:</p>
+
+<div class="highlight"><pre>npm <span class="nb">test</span>
+</pre></div>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Licensed under the MIT License.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/sendgrid">sendgrid</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
