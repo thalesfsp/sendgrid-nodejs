@@ -21,7 +21,7 @@
   "dependencies": {
     "nodemailer": "0.4.4",
     "mime": "1.2.9",
-    "request": "2.22.0",
+    "request": "2.88.2",
     "lodash": "2.0.0"
   },
   "devDependencies": {
